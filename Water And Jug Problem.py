@@ -1,12 +1,14 @@
 from queue import Queue
 
 
-def breadth_first_search(current_volumes: tuple[int], target_volume: int, capacities: tuple[int]) -> None:
+def breadth_first_search(initial_volumes: tuple[int], target_volume: int, capacities: tuple[int]) -> None:
     front: Queue[tuple[int]] = Queue()
-    front.put(current_volumes)
+    front.put(initial_volumes)
     visited: set[tuple[int]] = set()
 
     while not front.empty():
+        current_volumes = front.get()
+
         if current_volumes[0] == target_volume or current_volumes[1] == target_volume:
             print('Found target volume.')
             return
@@ -49,7 +51,7 @@ if __name__ == '__main__':
     capacities = capacities + (int(input('Enter jug 2 capacity: ')),)
 
     target_volume: int = int(input('Enter target volume: '))
-    current_volumes = (0, 0)
+    initial_volumes = (0, 0)
 
-    breadth_first_search(current_volumes, target_volume, capacities)
+    breadth_first_search(initial_volumes, target_volume, capacities)
 
